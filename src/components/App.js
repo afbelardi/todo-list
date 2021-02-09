@@ -26,7 +26,7 @@ export default function App(props) {
 
 	const [completedItems, finishItems] = useState([
 		{
-			item: '',
+			...items,
 			completed: true
 		}
 	]);
@@ -49,7 +49,14 @@ export default function App(props) {
 		});
 	};
 
-	const completeItem = () => {};
+	const completedButton = event => {
+		setToDoListData([...toDoListData, items]);
+		completedItems({
+			title: '',
+			completed: true
+		});
+	};
+
 	return (
 		<div className="parent">
 			<form id="set-to-do" onSubmit={handleSubmit}>
@@ -76,7 +83,9 @@ export default function App(props) {
 									<li key={`${item.title}`} className="list-item">
 										{item.title}
 									</li>
-									<button>Completed</button>
+									<button value={items.title} onClick={completedButton}>
+										Completed
+									</button>
 								</>
 							);
 						})}
